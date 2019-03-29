@@ -38,7 +38,7 @@
     c = SAT;
     printf("five %d\n",c);
     c = a;
-    printf("six %d\n",c); //±£ÁôÒÉÎÊ
+    printf("six %d\n",c); //ä¿ç•™ç–‘é—®
     return 0;
     */
     #include <stdio.h>
@@ -46,14 +46,14 @@
     #include "cJSON.h"
     //extern cJSON *cJSON_GetArrayItem(cJSON *array,int item);
 
-void printJson(cJSON * root)//ÒÔµİ¹éµÄ·½Ê½´òÓ¡jsonµÄ×îÄÚ²ã¼üÖµ¶Ô
+void printJson(cJSON * root)//ä»¥é€’å½’çš„æ–¹å¼æ‰“å°jsonçš„æœ€å†…å±‚é”®å€¼å¯¹
 {
-    for(int i=0; i<cJSON_GetArraySize(root); i++)   //±éÀú×îÍâ²ãjson¼üÖµ¶Ô
+    for(int i=0; i<cJSON_GetArraySize(root); i++)   //éå†æœ€å¤–å±‚jsoné”®å€¼å¯¹
     {
         cJSON * item = cJSON_GetArrayItem(root,i);
-        if(cJSON_Object == item->type)      //Èç¹û¶ÔÓ¦¼üµÄÖµÈÔÎªcJSON_Object¾Íµİ¹éµ÷ÓÃprintJson
+        if(cJSON_Object == item->type)      //å¦‚æœå¯¹åº”é”®çš„å€¼ä»ä¸ºcJSON_Objectå°±é€’å½’è°ƒç”¨printJson
             printJson(item);
-        else                                //Öµ²»Îªjson¶ÔÏó¾ÍÖ±½Ó´òÓ¡³ö¼üºÍÖµ
+        else                                //å€¼ä¸ä¸ºjsonå¯¹è±¡å°±ç›´æ¥æ‰“å°å‡ºé”®å’Œå€¼
         {
             printf("%s->", item->string);
             printf("%s\n", cJSON_Print(item));
@@ -63,9 +63,9 @@ void printJson(cJSON * root)//ÒÔµİ¹éµÄ·½Ê½´òÓ¡jsonµÄ×îÄÚ²ã¼üÖµ¶Ô
 
 int main()
 {
-    char * jsonStr = "{\"semantic\":{\"slots\":{\"name\":\"ÕÅÈı\"}}, \"rc\":0, \"operation\":\"CALL\", \"service\":\"telephone\", \"text\":\"´òµç»°¸øÕÅÈı\"}";
+    char * jsonStr = "{\"semantic\":{\"slots\":{\"name\":\"å¼ ä¸‰\"}}, \"rc\":0, \"operation\":\"CALL\", \"service\":\"telephone\", \"text\":\"æ‰“ç”µè¯ç»™å¼ ä¸‰\"}";
     cJSON * root = NULL;
-    cJSON * item = NULL;//cjson¶ÔÏó
+    cJSON * item = NULL;//cjsonå¯¹è±¡
 
     root = cJSON_Parse(jsonStr);
     if (!root)
@@ -74,27 +74,27 @@ int main()
     }
     else
     {
-        printf("%s\n", "ÓĞ¸ñÊ½µÄ·½Ê½´òÓ¡Json:");
+        printf("%s\n", "æœ‰æ ¼å¼çš„æ–¹å¼æ‰“å°Json:");
         printf("%s\n\n", cJSON_Print(root));
-        printf("%s\n", "ÎŞ¸ñÊ½·½Ê½´òÓ¡json£º");
+        printf("%s\n", "æ— æ ¼å¼æ–¹å¼æ‰“å°jsonï¼š");
         printf("%s\n\n", cJSON_PrintUnformatted(root));
 
-        printf("%s\n", "Ò»²½Ò»²½µÄ»ñÈ¡name ¼üÖµ¶Ô:");
-        printf("%s\n", "»ñÈ¡semanticÏÂµÄcjson¶ÔÏó:");
+        printf("%s\n", "ä¸€æ­¥ä¸€æ­¥çš„è·å–name é”®å€¼å¯¹:");
+        printf("%s\n", "è·å–semanticä¸‹çš„cjsonå¯¹è±¡:");
         item = cJSON_GetObjectItem(root, "semantic");//
         printf("%s\n", cJSON_Print(item));
-        printf("%s\n", "»ñÈ¡slotsÏÂµÄcjson¶ÔÏó");
+        printf("%s\n", "è·å–slotsä¸‹cjsonå¯¹è±¡");
         item = cJSON_GetObjectItem(item, "slots");
         printf("%s\n", cJSON_Print(item));
-        printf("%s\n", "»ñÈ¡nameÏÂµÄcjson¶ÔÏó");
+        printf("%s\n", "è·å–nameä¸‹çš„cjsonå¯¹è±¡:");
         item = cJSON_GetObjectItem(item, "name");
         printf("%s\n", cJSON_Print(item));
 
-        printf("%s:", item->string);   //¿´Ò»ÏÂcjson¶ÔÏóµÄ½á¹¹ÌåÖĞÕâÁ½¸ö³ÉÔ±µÄÒâË¼
+        printf("%s:", item->string);   //çœ‹ä¸€ä¸‹cjsonå¯¹è±¡çš„ç»“æ„ä½“ä¸­è¿™ä¸¤ä¸ªæˆå‘˜çš„æ„æ€
         printf("%s\n", item->valuestring);
 
 
-        printf("\n%s\n", "´òÓ¡jsonËùÓĞ×îÄÚ²ã¼üÖµ¶Ô:");
+        printf("\n%s\n", "æ‰“å°jsonæ‰€æœ‰æœ€å†…å±‚é”®å€¼å¯¹:");
         printJson(root);
     }
     return 0;
